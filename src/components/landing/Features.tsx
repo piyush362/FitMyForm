@@ -58,7 +58,7 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section className="relative py-16 sm:py-20 bg-white">
+    <section id="features" className="relative py-16 sm:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

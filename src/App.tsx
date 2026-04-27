@@ -8,7 +8,9 @@ export default function App() {
   const isLanding = location.pathname === "/";
 
   return (
-    <div className={`min-h-screen flex flex-col ${isLanding ? "landing-mode" : "tool-mode"}`}>
+    <div
+      className={`min-h-screen flex flex-col ${isLanding ? "landing-mode" : "tool-mode"}`}
+    >
       <Header />
       <div className="flex-1 flex flex-col">
         <Outlet />

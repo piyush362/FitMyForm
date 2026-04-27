@@ -10,7 +10,8 @@ const tools: ToolCardProps[] = [
       "Resize, crop, and compress photos to exact exam portal requirements — specific dimensions, file size, and format. Supports UPSC, SSC, IBPS, RRB presets.",
     icon: "🖼️",
     route: "/image-resizer",
-    gradient: "from-orange-500 to-amber-500",
+    gradient: "from-[var(--brand-blue)] to-[var(--brand-blue-light)]",
+    iconBg: "bg-blue-50",
     available: true,
     tags: ["JPG", "PNG", "WebP", "Crop", "Compress", "Exam Presets"],
   },
@@ -22,6 +23,7 @@ const tools: ToolCardProps[] = [
     icon: "📄",
     route: "/pdf-tools",
     gradient: "from-red-500 to-pink-500",
+    iconBg: "bg-red-50",
     available: false,
     tags: ["Merge", "Split", "Compress", "Convert"],
   },
@@ -33,6 +35,7 @@ const tools: ToolCardProps[] = [
     icon: "✍️",
     route: "/signature-maker",
     gradient: "from-violet-500 to-purple-500",
+    iconBg: "bg-violet-50",
     available: false,
     tags: ["Draw", "Upload", "Transparent BG", "Resize"],
   },
@@ -43,7 +46,8 @@ const tools: ToolCardProps[] = [
       "Scan and enhance documents using your phone camera. Auto-crop, perspective correction, and convert to clean PDF or image.",
     icon: "📸",
     route: "/document-scanner",
-    gradient: "from-sky-500 to-cyan-500",
+    gradient: "from-[var(--brand-green)] to-emerald-400",
+    iconBg: "bg-emerald-50",
     available: false,
     tags: ["Auto-crop", "Enhance", "PDF Export"],
   },
@@ -71,7 +75,7 @@ const itemVariants = {
 
 export default function ToolsGrid() {
   return (
-    <section id="tools" className="relative py-16 sm:py-20">
+    <section id="tools" className="relative py-16 sm:py-20 bg-slate-50/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section header */}
         <motion.div
@@ -81,10 +85,10 @@ export default function ToolsGrid() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3">
-            All Tools, <span className="text-[var(--saffron)]">One Place</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3">
+            All Tools, <span className="text-[var(--brand-blue)]">One Place</span>
           </h2>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
             Everything you need to prepare your government exam form documents.
             No sign-ups, no uploads to servers — everything runs locally.
           </p>
@@ -96,7 +100,7 @@ export default function ToolsGrid() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 sm:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"
         >
           {tools.map((tool) => (
             <motion.div key={tool.id} variants={itemVariants}>

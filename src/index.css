@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── Custom Design Tokens ─── */
+/* ─── Dark mode tokens (used by tool pages) ─── */
 :root {
   --navy: #0F172A;
   --navy-light: #1E293B;
@@ -17,6 +17,14 @@
   --success: #22C55E;
   --warning: #EAB308;
   --danger: #EF4444;
+
+  /* Brand colors (from logo) */
+  --brand-blue: #1B4F91;
+  --brand-blue-light: #2563EB;
+  --brand-blue-dark: #143C6E;
+  --brand-green: #2E9F47;
+  --brand-green-light: #34D058;
+  --brand-green-dark: #1E7A32;
 }
 
 /* ─── Base ─── */
@@ -35,9 +43,31 @@ html {
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* ─── Landing (light mode) ─── */
+.landing-mode {
+  background: #FFFFFF;
+  color: #1E293B;
+}
+
+.landing-mode .header-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* ─── Tool pages (dark mode) ─── */
+.tool-mode {
   background: var(--navy);
   color: var(--text-primary);
-  min-height: 100vh;
+}
+
+.tool-mode .header-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
 
 /* ─── react-image-crop overrides ─── */
@@ -47,12 +77,12 @@ body {
 }
 
 .ReactCrop__crop-selection {
-  border: 2px solid var(--saffron) !important;
+  border: 2px solid var(--brand-blue) !important;
   box-shadow: 0 0 0 9999em rgba(15, 23, 42, 0.65) !important;
 }
 
 .ReactCrop__drag-handle::after {
-  background-color: var(--saffron) !important;
+  background-color: var(--brand-blue) !important;
   border: none !important;
 }
 
@@ -71,8 +101,8 @@ body {
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  background: var(--navy-lighter);
-  color: var(--text-primary);
+  background: var(--navy);
+  color: #F8FAFC;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 0.75rem;
@@ -81,7 +111,7 @@ body {
   z-index: 50;
   pointer-events: none;
   transition: opacity 0.2s, visibility 0.2s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .tooltip-container:hover .tooltip-text {
@@ -89,31 +119,21 @@ body {
   opacity: 1;
 }
 
-/* ─── Glow effects ─── */
-.glow-saffron {
-  box-shadow: 0 0 40px rgba(249, 115, 22, 0.15), 0 0 80px rgba(249, 115, 22, 0.05);
-}
-
-.glow-saffron-strong {
-  box-shadow: 0 0 60px rgba(249, 115, 22, 0.25), 0 0 120px rgba(249, 115, 22, 0.1);
-}
-
-/* ─── Grid pattern for hero background ─── */
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(249, 115, 22, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(249, 115, 22, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--navy);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--navy-lighter);
+  background: #CBD5E1;
   border-radius: 3px;
+}
+
+.tool-mode::-webkit-scrollbar-track {
+  background: var(--navy);
+}
+.tool-mode::-webkit-scrollbar-thumb {
+  background: var(--navy-lighter);
 }

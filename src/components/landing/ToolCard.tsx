@@ -8,6 +8,7 @@ export interface ToolCardProps {
   icon: string;
   route: string;
   gradient: string;
+  iconBg: string;
   available: boolean;
   tags: string[];
 }
@@ -18,6 +19,7 @@ export default function ToolCard({
   icon,
   route,
   gradient,
+  iconBg,
   available,
   tags,
 }: ToolCardProps) {
@@ -27,44 +29,44 @@ export default function ToolCard({
       whileTap={available ? { scale: 0.98 } : {}}
       className={`
         relative group rounded-2xl overflow-hidden
-        bg-[var(--surface)] border border-[var(--border)]
+        bg-white border border-slate-200
+        shadow-sm
         transition-all duration-300
         ${
           available
-            ? "hover:border-[var(--saffron)]/50 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
+            ? "hover:border-[var(--brand-blue)]/30 hover:shadow-xl hover:shadow-blue-500/8 cursor-pointer"
             : "opacity-60 cursor-not-allowed"
         }
       `}
     >
       {/* Top gradient bar */}
-      <div className={`h-1 w-full bg-gradient-to-r ${gradient}`} />
+      <div className={`h-1.5 w-full bg-gradient-to-r ${gradient}`} />
 
       <div className="p-6 sm:p-7">
         {/* Icon */}
         <div
           className={`
             w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5
-            bg-gradient-to-br ${gradient} bg-opacity-10
+            ${iconBg}
             ${available ? "group-hover:scale-110 group-hover:rotate-3" : ""}
             transition-transform duration-300
           `}
-          style={{ background: `linear-gradient(135deg, rgba(249,115,22,0.1), rgba(249,115,22,0.05))` }}
         >
           {icon}
         </div>
 
         {/* Title & Status */}
         <div className="flex items-center gap-2 mb-3">
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">{title}</h3>
+          <h3 className="text-lg font-bold text-slate-900">{title}</h3>
           {!available && (
-            <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-[var(--navy-lighter)] text-[var(--text-muted)]">
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-500">
               Coming Soon
             </span>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
+        <p className="text-sm text-slate-600 leading-relaxed mb-5">
           {description}
         </p>
 
@@ -73,7 +75,7 @@ export default function ToolCard({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[var(--navy)] text-[var(--text-muted)] border border-[var(--border)]"
+              className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200"
             >
               {tag}
             </span>
@@ -82,7 +84,7 @@ export default function ToolCard({
 
         {/* CTA */}
         {available ? (
-          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--saffron)] group-hover:gap-3 transition-all duration-300">
+          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)] group-hover:gap-3 transition-all duration-300">
             <span>Open Tool</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +98,7 @@ export default function ToolCard({
             </svg>
           </div>
         ) : (
-          <p className="text-sm text-[var(--text-muted)] italic">
+          <p className="text-sm text-slate-400 italic">
             We're working on this — stay tuned!
           </p>
         )}

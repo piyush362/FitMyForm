@@ -1,0 +1,116 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+export interface ToolCardProps {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  route: string;
+  gradient: string;
+  available: boolean;
+  tags: string[];
+}
+
+export default function ToolCard({
+  title,
+  description,
+  icon,
+  route,
+  gradient,
+  available,
+  tags,
+}: ToolCardProps) {
+  const content = (
+    <motion.div
+      whileHover={available ? { y: -6, scale: 1.02 } : {}}
+      whileTap={available ? { scale: 0.98 } : {}}
+      className={`
+        relative group rounded-2xl overflow-hidden
+        bg-[var(--surface)] border border-[var(--border)]
+        transition-all duration-300
+        ${
+          available
+            ? "hover:border-[var(--saffron)]/50 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
+            : "opacity-60 cursor-not-allowed"
+        }
+      `}
+    >
+      {/* Top gradient bar */}
+      <div className={`h-1 w-full bg-gradient-to-r ${gradient}`} />
+
+      <div className="p-6 sm:p-7">
+        {/* Icon */}
+        <div
+          className={`
+            w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5
+            bg-gradient-to-br ${gradient} bg-opacity-10
+            ${available ? "group-hover:scale-110 group-hover:rotate-3" : ""}
+            transition-transform duration-300
+          `}
+          style={{ background: `linear-gradient(135deg, rgba(249,115,22,0.1), rgba(249,115,22,0.05))` }}
+        >
+          {icon}
+        </div>
+
+        {/* Title & Status */}
+        <div className="flex items-center gap-2 mb-3">
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">{title}</h3>
+          {!available && (
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-[var(--navy-lighter)] text-[var(--text-muted)]">
+              Coming Soon
+            </span>
+          )}
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
+          {description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[var(--navy)] text-[var(--text-muted)] border border-[var(--border)]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA */}
+        {available ? (
+          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--saffron)] group-hover:gap-3 transition-all duration-300">
+            <span>Open Tool</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
+        ) : (
+          <p className="text-sm text-[var(--text-muted)] italic">
+            We're working on this — stay tuned!
+          </p>
+        )}
+      </div>
+    </motion.div>
+  );
+
+  if (available) {
+    return (
+      <Link to={route} className="no-underline block">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
+}

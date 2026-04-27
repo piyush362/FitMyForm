@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import ReactCrop from "react-image-crop";
-import type { Crop, PixelCrop } from "react-image-crop";
+import type { Crop, PixelCrop, PercentCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
 interface CropEditorProps {
@@ -46,7 +46,7 @@ export default function CropEditor({
   }, []);
 
   const handleComplete = useCallback(
-    (_c: Crop, pixelCrop: PixelCrop) => {
+    (pixelCrop: PixelCrop, _percentageCrop: PercentCrop) => {
       if (pixelCrop.width > 0 && pixelCrop.height > 0) {
         setHasCrop(true);
         onCropComplete(pixelCrop);
